@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<b:beans xmlns="http://www.springframework.org/schema/security"
+         xmlns:b="http://www.springframework.org/schema/beans"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://www.springframework.org/schema/beans 
+                        http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
+                        http://www.springframework.org/schema/security 
+                        http://www.springframework.org/schema/security/spring-security-3.2.xsd">
+   <http>
+      <intercept-url pattern="/admin/**" access="ROLE_ADMIN"/>
+      <intercept-url pattern="/limited/**" access="ROLE_USER"/>
+      <form-login login-page="/public/login.jsf"
+                  always-use-default-target="true" 
+                  default-target-url="/limited/main.jsf"
+                  authentication-failure-url="/public/login.jsf?login_error=1"/>
+      <logout logout-success-url="http://www.google.com.br"/>
+      <remember-me token-validity-seconds="120"/>
+   </http>
+
+   <authentication-manager>
+      <authentication-provider>
+         <jdbc-user-service 
+            data-source-ref="MagmaFitnessDataSource" 
+            authorities-by-username-query="SELECT u.email, p.permissions
+                                                FROM users u, users_permissions p 
+                                                WHERE u.id = p.users 
+                                                AND u.email = ?"
+            users-by-username-query="SELECT email, password, active
+                                            FROM users 
+                                            WHERE email = ?"/> 
+      </authentication-provider>
+   </authentication-manager>
+</b:beans>
