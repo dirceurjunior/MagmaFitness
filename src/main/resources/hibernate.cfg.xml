@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+        <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property>
+        <property name="hibernate.connection.datasource">java:/comp/env/jdbc/MagmaFitnessDB</property>
+        <property name="hibernate.current_session_context_class">thread</property>
+        <property name="hibernate.hbm2ddl.auto">update</property>
+        <property name="show_sql">true</property>
+        <property name="format_sql">true</property>
+        <mapping class="com.magmafitness.model.users.Users"/>
+        <mapping class="com.magmafitness.model.address.Address"/>
+        <mapping class="com.magmafitness.model.phone.Phone"/>
+        <mapping class="com.magmafitness.model.email.Email"/>
+        <mapping class="com.magmafitness.model.contact.Contact"/>
+        <mapping class="com.magmafitness.model.stateCity.City"/>
+        <mapping class="com.magmafitness.model.stateCity.State"/>
+    </session-factory>
+</hibernate-configuration>
+
